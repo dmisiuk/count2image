@@ -18,8 +18,12 @@ public class Counter {
 
 	public Counter(File file) {
 		this.fileCount = file;
-		System.out.println("initialized counter");
 
+		readFromFile();
+
+	}
+
+	private void readFromFile() {
 		BufferedReader br = null;
 
 		try {
@@ -41,35 +45,20 @@ public class Counter {
 				}
 			}
 		}
-
 	}
 
 	synchronized public int increment() {
 
-		BufferedReader br = null;
-
-		try {
-			br = new BufferedReader(new FileReader(fileCount));
-			String s;
-			if ((s = br.readLine()) != null) {
-				count = Integer.parseInt(s);
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println(e);
-		} catch (IOException e) {
-			System.out.println(e);
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					System.out.println("error close file");
-				}
-			}
-		}
+		readFromFile();
 
 		count++;
 
+		writeToFile();
+
+		return count;
+	}
+
+	private void writeToFile() {
 		PrintWriter bw = null;
 		try {
 			bw = new PrintWriter(fileCount);
@@ -78,8 +67,6 @@ public class Counter {
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		}
-
-		return count;
 	}
 
 	public synchronized int getCount() {
