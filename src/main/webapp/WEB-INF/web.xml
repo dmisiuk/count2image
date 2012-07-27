@@ -1,7 +1,47 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    id="count2image" version="3.0">
+    
+  <display-name>count2image</display-name>
+  
+  <welcome-file-list>
+  	<welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>count</servlet-name>
+  	<servlet-class>by.minsler.controller.CountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>count</servlet-name>
+  	<url-pattern>/count</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>uniquecount</servlet-name>
+  	<servlet-class>by.minsler.controller.UniqueCountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>uniquecount</servlet-name>
+  	<url-pattern>/uniquecount</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <context-param>
+  	<param-name>countfile</param-name>
+  	<param-value>WEB-INF/log/count.txt</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>uniquecountfile</param-name>
+  	<param-value>WEB-INF/log/uniquecount.txt</param-value>
+  </context-param>
+ 
+ <listener>
+	<listener-class>by.minsler.listener.InitCountFile</listener-class>
+ </listener> 
 </web-app>
